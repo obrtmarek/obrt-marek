@@ -252,10 +252,16 @@ body {
     margin: clamp(12px, 3vw, 15px) 0;
     padding: clamp(15px, 4vw, 20px);
     background-color: #FFD700;
-    color: #222;
+    color: #222 !important;
     border-radius: 5px;
     text-align: center;
     letter-spacing: 2px;
+    text-decoration: none !important;
+}
+
+.phone-number * {
+    color: #222 !important;
+    text-decoration: none !important;
 }
 
 /* Contact Form */
