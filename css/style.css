@@ -196,11 +196,18 @@ a {
     border-bottom: 1px solid #eee;
 }
 
+
+/* Default: yellow checkmark (for taxi/poslovna putovanja) */
 .service-details li:before {
     content: "✓ ";
     color: #FFD700;
     font-weight: bold;
     margin-right: 10px;
+}
+
+/* Blue checkmark for cleaning pages */
+.cleaning-page .service-details li:before {
+    color: #1e88e5;
 }
 
 .service-details li:last-child {
