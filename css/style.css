@@ -1,3 +1,10 @@
+/* Ensure all carousel images are the same size */
+.carousel img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    background: #e0e0e0;
+}
 /* Reset and Base Styles */
 * {
     margin: 0;
