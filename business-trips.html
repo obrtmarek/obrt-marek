@@ -5,14 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Obrt Marek - Poslovna Putovanja</title>
     <link rel="stylesheet" href="css/style.css">
-    <style>
-    .carousel { position: relative; width: 100%; max-width: 400px; margin: 20px auto; overflow: hidden; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-    .carousel img { width: 100%; display: none; transition: opacity 0.5s; border-radius: 10px; }
-    .carousel img.active { display: block; opacity: 1; }
-    .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.3); color: #fff; border: none; font-size: 2em; padding: 0 10px; cursor: pointer; z-index: 2; border-radius: 50%; user-select: none; }
-    .carousel-btn.left { left: 10px; }
-    .carousel-btn.right { right: 10px; }
-    </style>
 </head>
 <body>
     <!-- Header -->
@@ -24,7 +16,7 @@
             </div>
             <nav class="nav">
                 <ul>
-                    <li><a href="index.html#taxi">Poslovna Putovanja</a></li>
+                    <li><a href="index.html#business-trips">Poslovna Putovanja</a></li>
                     <li><a href="index.html#cleaning">Usluge Čišćenja</a></li>
                     <li><a href="index.html#contact">Kontakt</a></li>
                 </ul>
@@ -41,7 +33,7 @@
     </section>
 
     <!-- Service Details -->
-    <section class="services">
+    <section class="services business-trips-section">
         <div class="container">
             <div class="service-details">
                 <ul>
@@ -83,55 +75,5 @@
             <p>&copy; 2026 Obrt Marek. Sva prava zadržana.</p>
         </div>
     </footer>
-</body>
-<script>
-// Simple carousel logic for all carousels on the page
-document.querySelectorAll('.carousel').forEach(function(carousel) {
-    const images = carousel.querySelectorAll('img');
-    let current = 0;
-    const show = idx => {
-        images.forEach((img, i) => img.classList.toggle('active', i === idx));
-    };
-    carousel.querySelector('.carousel-btn.left').onclick = e => {
-        e.preventDefault();
-        current = (current - 1 + images.length) % images.length;
-        show(current);
-    };
-    carousel.querySelector('.carousel-btn.right').onclick = e => {
-        e.preventDefault();
-        current = (current + 1) % images.length;
-        show(current);
-    };
-    setInterval(() => {
-        current = (current + 1) % images.length;
-        show(current);
-    }, 5000);
-});
-</script>
-</body>
-<script>
-// Simple carousel logic for all carousels on the page
-document.querySelectorAll('.carousel').forEach(function(carousel) {
-    const images = carousel.querySelectorAll('img');
-    let current = 0;
-    const show = idx => {
-        images.forEach((img, i) => img.classList.toggle('active', i === idx));
-    };
-    carousel.querySelector('.carousel-btn.left').onclick = e => {
-        e.preventDefault();
-        current = (current - 1 + images.length) % images.length;
-        show(current);
-    };
-    carousel.querySelector('.carousel-btn.right').onclick = e => {
-        e.preventDefault();
-        current = (current + 1) % images.length;
-        show(current);
-    };
-    setInterval(() => {
-        current = (current + 1) % images.length;
-        show(current);
-    }, 5000);
-});
-</script>
 </body>
 </html>
