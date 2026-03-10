@@ -1,3 +1,149 @@
+.business-name {
+    color: #fff !important;
+}
+/* Dark blue theme for contact section on service pages (except taxi/index) */
++/* Black main background for contact section on service pages (except taxi/index) */
+.cleaning-page .contact-section,
+.maintenance-page .contact-section,
+.landscaping-page .contact-section,
+.cleaning-offices-page .contact-section {
+    background: linear-gradient(135deg, #222 0%, #333 100%);
+    color: #fff;
+}
+.cleaning-page .contact-section h2,
+.maintenance-page .contact-section h2,
+.landscaping-page .contact-section h2,
+.cleaning-offices-page .contact-section h2 {
+    color: #fff;
+}
+.cleaning-page .contact-label,
+.maintenance-page .contact-label,
+.landscaping-page .contact-label,
+.cleaning-offices-page .contact-label {
+    color: #1e88e5;
+}
+.cleaning-page .contact-info,
+.maintenance-page .contact-info,
+.landscaping-page .contact-info,
+.cleaning-offices-page .contact-info {
+    background: rgba(30, 136, 229, 0.08);
+    border-left: 5px solid #1e88e5;
+    color: #fff;
+}
+.cleaning-page .phone-number,
+.maintenance-page .phone-number,
+.landscaping-page .phone-number,
+.cleaning-offices-page .phone-number {
+    background: #1e88e5;
+    color: #fff !important;
+    font-weight: bold;
+}
+.cleaning-page .contact-form input,
+.maintenance-page .contact-form input,
+.landscaping-page .contact-form input,
+.cleaning-offices-page .contact-form input,
+.cleaning-page .contact-form textarea,
+.maintenance-page .contact-form textarea,
+.landscaping-page .contact-form textarea,
+.cleaning-offices-page .contact-form textarea {
+    border: 2px solid #1e88e5;
+    color: #1e88e5;
+    background: #182848;
+}
+.cleaning-page .contact-form input::placeholder,
+.maintenance-page .contact-form input::placeholder,
+.landscaping-page .contact-form input::placeholder,
+.cleaning-offices-page .contact-form input::placeholder,
+.cleaning-page .contact-form textarea::placeholder,
+.maintenance-page .contact-form textarea::placeholder,
+.landscaping-page .contact-form textarea::placeholder,
+.cleaning-offices-page .contact-form textarea::placeholder {
+    color: #1e88e5;
+    opacity: 0.7;
+}
+.cleaning-page .contact-form input:focus,
+.maintenance-page .contact-form input:focus,
+.landscaping-page .contact-form input:focus,
+.cleaning-offices-page .contact-form input:focus,
+.cleaning-page .contact-form textarea:focus,
+.maintenance-page .contact-form textarea:focus,
+.landscaping-page .contact-form textarea:focus,
+.cleaning-offices-page .contact-form textarea:focus {
+    outline: none;
+    background-color: #223366;
+    border-color: #1e88e5;
+    color: #fff;
+}
+.cleaning-page .submit-btn,
+.maintenance-page .submit-btn,
+.landscaping-page .submit-btn,
+.cleaning-offices-page .submit-btn {
+    background: #1e88e5;
+    color: #fff;
+    border: 2px solid #1e88e5;
+}
+.cleaning-page .submit-btn:hover,
+.maintenance-page .submit-btn:hover,
+.landscaping-page .submit-btn:hover,
+.cleaning-offices-page .submit-btn:hover {
+    background: #1565c0;
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(30, 136, 229, 0.3);
+}
+/* Blue accent overrides for service pages (except taxi/index) */
+.cleaning-page .header,
+.maintenance-page .header,
+.landscaping-page .header,
+.cleaning-offices-page .header {
+    color: #fff;
+}
+.cleaning-page .logo-section .tagline,
+.maintenance-page .logo-section .tagline,
+.landscaping-page .logo-section .tagline,
+.cleaning-offices-page .logo-section .tagline {
+    color: #1e88e5;
+}
+.cleaning-page .nav a,
+.maintenance-page .nav a,
+.landscaping-page .nav a,
+.cleaning-offices-page .nav a {
+    color: #1e88e5;
+}
+.cleaning-page .nav a:hover,
+.maintenance-page .nav a:hover,
+.landscaping-page .nav a:hover,
+.cleaning-offices-page .nav a:hover {
+    border-bottom-color: #1e88e5;
+}
+.cleaning-page .hero,
+.maintenance-page .hero,
+.landscaping-page .hero,
+.cleaning-offices-page .hero {
+    background: linear-gradient(135deg, #1e88e5 0%, #1565c0 100%);
+    color: #fff;
+}
+.cleaning-page .cta-button,
+.maintenance-page .cta-button,
+.landscaping-page .cta-button,
+.cleaning-offices-page .cta-button {
+    background-color: #1e88e5;
+    color: #fff;
+    border: 2px solid #1e88e5;
+}
+.cleaning-page .cta-button:hover,
+.maintenance-page .cta-button:hover,
+.landscaping-page .cta-button:hover,
+.cleaning-offices-page .cta-button:hover {
+    background-color: #1565c0;
+    color: #fff;
+    border-color: #1565c0;
+}
+.cleaning-page .carousel-btn,
+.maintenance-page .carousel-btn,
+.landscaping-page .carousel-btn,
+.cleaning-offices-page .carousel-btn {
+    color: #1e88e5;
+}
 /* Carousel button style: simple arrow, no background */
 .carousel-btn {
     position: absolute;
@@ -390,6 +536,12 @@ a {
     text-align: center;
     padding: clamp(15px, 4vw, 20px);
     font-size: clamp(0.8em, 1.5vw, 0.9em);
+}
+.cleaning-page .footer,
+.maintenance-page .footer,
+.landscaping-page .footer,
+.cleaning-offices-page .footer {
+    color: #1e88e5;
 }
 
 /* Responsive Design - Tablet and Down */
