@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Obrt Marek - Čišćenje Stanova</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Obrt Marek - Čišćenje Ureda</title>
+    <link rel="stylesheet" href="../css/style.css">
     <style>
     .carousel { position: relative; width: 100%; max-width: 400px; margin: 20px auto; overflow: hidden; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
     .carousel img { width: 100%; display: none; transition: opacity 0.5s; border-radius: 10px; }
     .carousel img.active { display: block; opacity: 1; }
     .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.3); color: #fff; border: none; font-size: 2em; padding: 0 10px; cursor: pointer; z-index: 2; border-radius: 50%; user-select: none; }
+        .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.3); color: #fff !important; border: none; font-size: 2em; padding: 0 10px; cursor: pointer; z-index: 2; border-radius: 50%; user-select: none; text-shadow: 0 1px 4px #000; }
     .carousel-btn.left { left: 10px; }
     .carousel-btn.right { right: 10px; }
     </style>
@@ -35,13 +36,13 @@
     <!-- Hero Section -->
     <section class="hero" id="home" style="background: linear-gradient(135deg, #1e88e5 0%, #1565c0 100%); color: #fff;">
         <div class="container">
-            <h2>Čišćenje Stanova</h2>
-            <p>Profesionalno čišćenje apartmana i kuća. Detaljno čišćenje svih prostorija sa kvalitetnim materijalima.</p>
-            <div class="carousel" data-carousel="cleaning-apartments">
+            <h2>Čišćenje Ureda</h2>
+            <p>Održavanje uredskih prostora. Čist i uredan ured je produktivniji ured.</p>
+            <div class="carousel" data-carousel="cleaning-offices">
                 <button class="carousel-btn left" aria-label="Prethodna slika">&#8592;</button>
-                <img src="assets/carousel-images/cleaning-apartments/cleaning.jpg" alt="Stan 1" class="active">
-                <img src="assets/carousel-images/cleaning-apartments/halo-posto-generalka-istrazili-smo-koliko-stoji-luksuz-blistavog-stana-105942763-3015.jpg" alt="Stan 2">
-                <img src="assets/carousel-images/cleaning-apartments/generalno-ciscenje-stana.jpg" alt="Stan 3">
+                <img src="assets/carousel-images/cleaning-offices/ured1.jpg" alt="Ured 1" class="active">
+                <img src="assets/carousel-images/cleaning-offices/big-189513954_699723c3d1d220-690461739fab29b4-bbbe-4.webp" alt="Ured 2">
+                <img src="assets/carousel-images/cleaning-offices/images2.jpg" alt="Ured 3">
                 <button class="carousel-btn right" aria-label="Sljedeća slika">&#8594;</button>
             </div>
         </div>
@@ -52,9 +53,9 @@
         <div class="container">
             <div class="service-details">
                 <ul>
-                    <li>Detaljno čišćenje</li>
-                    <li>Kvalitetni materijali</li>
-                    <li>Fleksibilni termini</li>
+                    <li>Održavanje čistoće</li>
+                    <li>Profesionalni tim</li>
+                    <li>Redovne usluge</li>
                 </ul>
             </div>
         </div>
@@ -113,7 +114,7 @@ document.querySelectorAll('.carousel').forEach(function(carousel) {
     setInterval(() => {
         current = (current + 1) % images.length;
         show(current);
-    }, 5000);
+        }, 2000);
 });
 </script>
 </body>

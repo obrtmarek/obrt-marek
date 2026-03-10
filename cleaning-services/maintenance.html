@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Obrt Marek - Čišćenje Stanova</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Obrt Marek - Održavanje Prostora</title>
+    <link rel="stylesheet" href="../css/style.css">
     <style>
     .carousel { position: relative; width: 100%; max-width: 400px; margin: 20px auto; overflow: hidden; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
     .carousel img { width: 100%; display: none; transition: opacity 0.5s; border-radius: 10px; }
     .carousel img.active { display: block; opacity: 1; }
     .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.3); color: #fff; border: none; font-size: 2em; padding: 0 10px; cursor: pointer; z-index: 2; border-radius: 50%; user-select: none; }
+        .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.3); color: #fff !important; border: none; font-size: 2em; padding: 0 10px; cursor: pointer; z-index: 2; border-radius: 50%; user-select: none; text-shadow: 0 1px 4px #000; }
     .carousel-btn.left { left: 10px; }
     .carousel-btn.right { right: 10px; }
     </style>
@@ -35,13 +36,13 @@
     <!-- Hero Section -->
     <section class="hero" id="home" style="background: linear-gradient(135deg, #1e88e5 0%, #1565c0 100%); color: #fff;">
         <div class="container">
-            <h2>Čišćenje Stanova</h2>
-            <p>Profesionalno čišćenje apartmana i kuća. Detaljno čišćenje svih prostorija sa kvalitetnim materijalima.</p>
-            <div class="carousel" data-carousel="cleaning-apartments">
+            <h2>Održavanje Prostora</h2>
+            <p>Redovito održavanje čistoće vašeg poslovnog ili stambenog prostora prema vašim potrebama.</p>
+            <div class="carousel" data-carousel="maintenance">
                 <button class="carousel-btn left" aria-label="Prethodna slika">&#8592;</button>
-                <img src="assets/carousel-images/cleaning-apartments/cleaning.jpg" alt="Stan 1" class="active">
-                <img src="assets/carousel-images/cleaning-apartments/halo-posto-generalka-istrazili-smo-koliko-stoji-luksuz-blistavog-stana-105942763-3015.jpg" alt="Stan 2">
-                <img src="assets/carousel-images/cleaning-apartments/generalno-ciscenje-stana.jpg" alt="Stan 3">
+                <img src="assets/carousel-images/maintenance/homemaintenanceinspection.jpg" alt="Održavanje 1" class="active">
+                <img src="assets/carousel-images/maintenance/part-male-construction-worker_329181-3734.avif" alt="Održavanje 2">
+                <img src="assets/carousel-images/maintenance/regular-home-maintenance.jpg" alt="Održavanje 3">
                 <button class="carousel-btn right" aria-label="Sljedeća slika">&#8594;</button>
             </div>
         </div>
@@ -52,9 +53,9 @@
         <div class="container">
             <div class="service-details">
                 <ul>
-                    <li>Detaljno čišćenje</li>
-                    <li>Kvalitetni materijali</li>
-                    <li>Fleksibilni termini</li>
+                    <li>Redovito održavanje</li>
+                    <li>Prilagođene usluge</li>
+                    <li>Kvalitetno čišćenje</li>
                 </ul>
             </div>
         </div>
@@ -70,8 +71,7 @@
                     <p class="contact-label">Pozovite nas za poslovna putovanja ili usluge čišćenja:</p>
                     <p class="phone-number">📞 095 345 4523</p>
                     <p class="contact-label">Dostupni smo:</p>
-                    <p>Ponedjeljak - Petak: 07:00 - 17:00</p>
-                    <p>Subota i Nedjelja: po dogovoru</p>
+                    <p>Ponedjeljak - Nedjelja: 07:00 - 22:00</p>
                 </div>
                 <div class="contact-form">
                     <form>
@@ -91,6 +91,31 @@
             <p>&copy; 2026 Obrt Marek. Sva prava zadržana.</p>
         </div>
     </footer>
+</body>
+<script>
+// Simple carousel logic for all carousels on the page
+document.querySelectorAll('.carousel').forEach(function(carousel) {
+    const images = carousel.querySelectorAll('img');
+    let current = 0;
+    const show = idx => {
+        images.forEach((img, i) => img.classList.toggle('active', i === idx));
+    };
+    carousel.querySelector('.carousel-btn.left').onclick = e => {
+        e.preventDefault();
+        current = (current - 1 + images.length) % images.length;
+        show(current);
+    };
+    carousel.querySelector('.carousel-btn.right').onclick = e => {
+        e.preventDefault();
+        current = (current + 1) % images.length;
+        show(current);
+    };
+    setInterval(() => {
+        current = (current + 1) % images.length;
+        show(current);
+        }, 2000);
+});
+</script>
 </body>
 <script>
 // Simple carousel logic for all carousels on the page
