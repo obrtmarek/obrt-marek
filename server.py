@@ -1,20 +1,18 @@
 #!/usr/bin/env python3
 
-import http.server
-import socketserver
-import os
+from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 from pathlib import Path
 
-# Change to the directory containing this script
-os.chdir(Path(__file__).parent)
+# Get the directory containing this script
+current_dir = Path(__file__).parent
 
-# Configure the server
-PORT = 8080
-HANDLER = http.server.SimpleHTTPRequestHandler
+# Create FastAPI app
+app = FastAPI()
 
-# Create the server
-with socketserver.TCPServer(("", PORT), HANDLER) as httpd:
-    print(f"Server running at http://localhost:{PORT}/")
-    print(f"Serving files from: {os.getcwd()}")
-    print("Press Ctrl+C to stop the server")
-    httpd.serve_forever()
+# Mount static files from the current directory
+app.mount("/", StaticFiles(directory=current_dir, html=True), name="static")
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8080)
