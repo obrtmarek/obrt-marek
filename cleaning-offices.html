@@ -23,7 +23,7 @@
         .carousel-btn.right { right: 10px; }
     </style>
 </head>
-<body class="cleaning-page">
+<body class="cleaning-offices-page">
     <!-- Header -->
     <header class="header" style="background: linear-gradient(135deg, #222 0%, #333 100%);">
         <div class="container">
@@ -33,7 +33,6 @@
             </div>
             <nav class="nav">
                 <ul>
-                    <li><a href="index.html#business-trips">Poslovna Putovanja</a></li>
                     <li><a href="index.html#cleaning">Usluge Čišćenja</a></li>
                     <li><a href="index.html#contact">Kontakt</a></li>
                 </ul>
@@ -49,22 +48,38 @@
             <div class="carousel" data-carousel="cleaning-offices">
                 <button class="carousel-btn left" aria-label="Prethodna slika">&#8592;</button>
                 <img src="assets/carousel-images/cleaning-offices/offices-1.jpg" alt="Ured 1" class="active">
-                <img src="assets/carousel-images/cleaning-offices/offices-2.webp" alt="Ured 2">
-                <img src="assets/carousel-images/cleaning-offices/offices-3.jpg" alt="Ured 3">
                 <button class="carousel-btn right" aria-label="Sljedeća slika">&#8594;</button>
             </div>
         </div>
     </section>
 
     <!-- Service Details -->
-    <section class="services">
+    <section class="services" style="background-color: #fff; padding: 60px 20px;">
         <div class="container">
-            <div class="service-details">
-                <ul>
-                    <li>Održavanje čistoće</li>
-                    <li>Profesionalni tim</li>
-                    <li>Redovne usluge</li>
+            <div class="service-details" style="max-width: 800px; margin: 0 auto;">
+                <p style="margin-bottom: 15px; line-height: 1.8; font-size: 1em;">
+                    Tražite pouzdanu uslugu za čišćenje ureda? Nudimo temeljito i redovito održavanje poslovnih prostora kako bi vaš ured uvijek bio čist, uredan i spreman za rad.
+                </p>
+                <p style="margin-bottom: 15px; line-height: 1.8; font-size: 1em;">
+                    Naš tim koristi profesionalnu opremu i učinkovite metode, uključujući parno čišćenje, za maksimalnu čistoću i dezinfekciju radnog prostora.
+                </p>
+                <h3 style="color: #1e88e5; margin-top: 28px; margin-bottom: 12px; font-size: 1.35em;">Naše usluge čišćenja ureda uključuju</h3>
+                <p style="margin-bottom: 12px; line-height: 1.8; font-size: 1em;">
+                    Prilagođavamo uslugu potrebama vašeg poslovnog prostora:
+                </p>
+                <ul style="margin: 0 0 12px 0; padding-left: 22px; line-height: 1.9; font-size: 1em;">
+                    <li>brisanje prašine sa stolova, polica i uredske opreme</li>
+                    <li>usisavanje i pranje podova</li>
+                    <li>čišćenje sanitarnih čvorova (WC, umivaonici, pločice)</li>
+                    <li>čišćenje kuhinja i zajedničkih prostora</li>
+                    <li>čišćenje staklenih površina i prozora</li>
+                    <li>pražnjenje koševa i odvoz otpada</li>
+                    <li>dezinfekcija često korištenih površina (kvake, prekidači, stolovi)</li>
+                    <li>parno čišćenje za dubinsku higijenu i uklanjanje bakterija</li>
                 </ul>
+                <p style="margin-bottom: 15px; line-height: 1.8; font-size: 1em;">
+                    Nudimo jednokratno i redovito održavanje ureda (dnevno, tjedno ili po dogovoru).
+                </p>
             </div>
         </div>
     </section>
@@ -76,7 +91,7 @@
             <div class="contact-content">
                 <div class="contact-info">
                     <h3>Obrt Marek</h3>
-                    <p class="contact-label">Pozovite nas za poslovna putovanja ili usluge čišćenja:</p>
+                    <p class="contact-label">Pozovite nas za usluge čišćenja:</p>
                     <p class="phone-number">📞 095 345 4523</p>
                     <p class="contact-label">Dostupni smo:</p>
                     <p>Ponedjeljak - Petak: 07:00 - 17:00</p>
@@ -100,7 +115,6 @@
             <p>&copy; 2026 Obrt Marek. Sva prava zadržana.</p>
         </div>
     </footer>
-</body>
 <script>
 // Simple carousel logic for all carousels on the page
 document.querySelectorAll('.carousel').forEach(function(carousel) {
