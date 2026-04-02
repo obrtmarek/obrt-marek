@@ -520,11 +520,24 @@ a {
 /* Responsive Design - Tablet and Down */
 @media (max-width: 768px) {
     .header .container {
+        flex-direction: column;
         justify-content: center;
+        align-items: center;
+        gap: 12px;
     }
 
     .logo-section {
+        width: 100%;
         text-align: center;
+    }
+
+    .nav {
+        width: 100%;
+    }
+
+    .nav ul {
+        width: 100%;
+        justify-content: center;
     }
 
     .contact-content {
