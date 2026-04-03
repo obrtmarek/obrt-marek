@@ -1,12 +1,12 @@
 const pricingForm = document.getElementById('pricing-form');
-const kvadraturaInput = document.getElementById('kvadratura');
-const kvadraturaValue = document.getElementById('kvadratura-value');
+const serviceKvadraturaList = document.getElementById('service-kvadratura-list');
 const totalPriceElement = document.getElementById('total-price');
 const breakdownElement = document.getElementById('price-breakdown');
 const contactError = document.getElementById('contact-error');
 
 if (pricingForm) {
     const allCardInputs = pricingForm.querySelectorAll('.select-card input[type="checkbox"]');
+    const serviceKvadraturaMap = {};
 
     const formatCurrency = (value) => value.toFixed(2);
 
@@ -45,8 +45,74 @@ if (pricingForm) {
         });
     };
 
+    const ensureServiceKvadraturaState = (baseServices) => {
+        baseServices.forEach((serviceInput) => {
+            if (typeof serviceKvadraturaMap[serviceInput.value] === 'undefined') {
+                serviceKvadraturaMap[serviceInput.value] = 60;
+            }
+        });
+    };
+
+    const renderServiceKvadraturaSliders = () => {
+        const baseServices = getSelectedCards('base-service');
+        const activeKeys = new Set(baseServices.map((serviceInput) => serviceInput.value));
+
+        Object.keys(serviceKvadraturaMap).forEach((serviceKey) => {
+            if (!activeKeys.has(serviceKey)) {
+                delete serviceKvadraturaMap[serviceKey];
+            }
+        });
+
+        ensureServiceKvadraturaState(baseServices);
+        serviceKvadraturaList.innerHTML = '';
+
+        if (baseServices.length === 0) {
+            const emptyMessage = document.createElement('p');
+            emptyMessage.className = 'slider-empty';
+            emptyMessage.textContent = 'Odaberite glavne usluge kako biste postavili kvadraturu za svaku.';
+            serviceKvadraturaList.appendChild(emptyMessage);
+            return;
+        }
+
+        baseServices.forEach((serviceInput) => {
+            const serviceKey = serviceInput.value;
+            const currentValue = serviceKvadraturaMap[serviceKey] || 60;
+
+            const item = document.createElement('div');
+            item.className = 'service-kvadratura-item';
+
+            const title = document.createElement('p');
+            title.className = 'service-kvadratura-title';
+            title.innerHTML = `${serviceInput.dataset.label}: <strong><span data-kv-value="${serviceKey}">${currentValue}</span> m²</strong>`;
+
+            const slider = document.createElement('input');
+            slider.type = 'range';
+            slider.min = '20';
+            slider.max = '500';
+            slider.step = '5';
+            slider.value = String(currentValue);
+            slider.className = 'service-kvadratura-slider';
+            slider.dataset.serviceKey = serviceKey;
+
+            slider.addEventListener('input', (event) => {
+                const nextValue = Number(event.target.value);
+                serviceKvadraturaMap[serviceKey] = nextValue;
+
+                const valueElement = item.querySelector(`[data-kv-value="${serviceKey}"]`);
+                if (valueElement) {
+                    valueElement.textContent = String(nextValue);
+                }
+
+                calculatePrice();
+            });
+
+            item.appendChild(title);
+            item.appendChild(slider);
+            serviceKvadraturaList.appendChild(item);
+        });
+    };
+
     const calculatePrice = () => {
-        const kvadratura = Number(kvadraturaInput.value);
         const baseServices = getSelectedCards('base-service');
         const extraServices = getSelectedCards('extra-service');
         const weekendMultiplier = getWeekendMultiplier();
@@ -58,9 +124,10 @@ if (pricingForm) {
 
         baseServices.forEach((serviceInput) => {
             const servicePrice = Number(serviceInput.dataset.price);
-            const itemTotal = servicePrice * kvadratura;
+            const serviceKvadratura = Number(serviceKvadraturaMap[serviceInput.value] || 60);
+            const itemTotal = servicePrice * serviceKvadratura;
             baseTotal += itemTotal;
-            breakdown.push(`${serviceInput.dataset.label}: ${formatCurrency(itemTotal)} €`);
+            breakdown.push(`${serviceInput.dataset.label} (${serviceKvadratura} m²): ${formatCurrency(itemTotal)} €`);
         });
 
         extraServices.forEach((extraInput) => {
@@ -114,14 +181,10 @@ if (pricingForm) {
         return true;
     };
 
-    kvadraturaInput.addEventListener('input', () => {
-        kvadraturaValue.textContent = kvadraturaInput.value;
-        calculatePrice();
-    });
-
     pricingForm.querySelectorAll('input').forEach((inputElement) => {
         inputElement.addEventListener('change', () => {
             updateSelectedCardStyle();
+            renderServiceKvadraturaSliders();
             calculatePrice();
         });
     });
@@ -150,5 +213,6 @@ if (pricingForm) {
     });
 
     updateSelectedCardStyle();
+    renderServiceKvadraturaSliders();
     calculatePrice();
 }

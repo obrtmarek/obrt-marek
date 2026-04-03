@@ -581,9 +581,42 @@ a {
     color: #1f2937;
 }
 
-#kvadratura {
+.slider-help {
+    color: #334155;
+    margin-bottom: 10px;
+}
+
+.service-kvadratura-list {
+    display: grid;
+    gap: 12px;
+}
+
+.service-kvadratura-item {
+    border: 1px solid #c8d9ef;
+    border-radius: 8px;
+    padding: 12px;
+    background: #f8fbff;
+}
+
+.service-kvadratura-title {
+    color: #1f2937;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.service-kvadratura-title strong {
+    color: #1e88e5;
+}
+
+.service-kvadratura-slider {
     width: 100%;
     accent-color: #1e88e5;
+}
+
+.slider-empty {
+    color: #64748b;
+    font-style: italic;
+    margin: 0;
 }
 
 .card-grid {
