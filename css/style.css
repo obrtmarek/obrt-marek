@@ -530,6 +530,7 @@ a {
     display: flex;
     flex-direction: column;
     gap: 22px;
+    padding-bottom: 180px;
 }
 
 .calculator-block {
@@ -648,37 +649,51 @@ a {
 }
 
 .calculator-result {
-    background: #182848;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 300;
+    background: linear-gradient(135deg, #222 0%, #333 100%);
     color: #fff;
-    border-radius: 10px;
-    padding: clamp(18px, 3vw, 24px);
+    border-top: 2px solid #1e88e5;
+    border-radius: 0;
+    padding: 12px clamp(16px, 4vw, 24px);
+    box-shadow: 0 -6px 18px rgba(0, 0, 0, 0.4);
 }
 
 .calculator-result h3 {
     color: #fff;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
+    font-size: clamp(0.95em, 2vw, 1.1em);
+    text-transform: uppercase;
 }
 
 .result-main {
-    font-size: clamp(1.2em, 3vw, 1.45em);
-    margin-bottom: 4px;
+    font-size: clamp(1.05em, 2.8vw, 1.35em);
+    margin: 8px 0;
+    color: #fff !important;
+    font-weight: bold;
+    padding: 10px;
+    background: #1e88e5;
+    border-radius: 5px;
+    text-align: center;
 }
 
 .result-note {
-    color: #a9d2ff;
-    font-size: 0.9em;
-    margin-bottom: 12px;
+    color: #1e88e5;
+    font-size: 0.85em;
+    margin-bottom: 0;
 }
 
 #price-breakdown {
-    list-style: none;
-    display: grid;
-    gap: 6px;
+    display: none;
 }
 
 #price-breakdown li {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    padding-bottom: 4px;
+    border: none;
+    padding-bottom: 0;
 }
 
 /* Responsive Design - Tablet and Down */
@@ -715,6 +730,10 @@ a {
 
     .calculator-grid-two {
         grid-template-columns: 1fr;
+    }
+
+    .calculator-form {
+        padding-bottom: 200px;
     }
 }
 
@@ -757,6 +776,26 @@ a {
 
     .contact-info {
         padding: clamp(15px, 4vw, 20px);
+    }
+
+    .calculator-form {
+        padding-bottom: 220px;
+    }
+
+    .calculator-result {
+        padding: 10px 14px;
+    }
+
+    .calculator-result h3 {
+        font-size: 0.9em;
+    }
+
+    .result-main {
+        font-size: 1.05em;
+    }
+
+    .result-note {
+        font-size: 0.8em;
     }
 }
 
