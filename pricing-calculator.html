@@ -34,20 +34,6 @@
         <div class="container calculator-container">
             <form id="pricing-form" class="calculator-form" novalidate>
                 <div class="calculator-block">
-                    <h3>Termin čišćenja</h3>
-                    <div class="calculator-grid calculator-grid-two">
-                        <label class="field-group" for="datum-ciscenja">
-                            Datum čišćenja
-                            <input type="date" id="datum-ciscenja" name="datum-ciscenja" required>
-                        </label>
-                        <label class="field-group" for="vrijeme-ciscenja">
-                            Vrijeme čišćenja
-                            <input type="time" id="vrijeme-ciscenja" name="vrijeme-ciscenja" required>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="calculator-block">
                     <h3>Odaberite usluge (moguće više odabira)</h3>
                     <div class="card-grid" id="base-services">
                         <label class="select-card">
@@ -111,6 +97,20 @@
                 </div>
 
                 <div class="calculator-block">
+                    <h3>Termin čišćenja</h3>
+                    <div class="calculator-grid calculator-grid-two">
+                        <label class="field-group" for="datum-ciscenja">
+                            Datum čišćenja
+                            <input type="date" id="datum-ciscenja" name="datum-ciscenja" required>
+                        </label>
+                        <label class="field-group" for="vrijeme-ciscenja">
+                            Vrijeme čišćenja
+                            <input type="time" id="vrijeme-ciscenja" name="vrijeme-ciscenja" required>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="calculator-block">
                     <h3>Podaci za kontakt</h3>
                     <div class="calculator-grid calculator-grid-two">
                         <label class="field-group" for="ime">
@@ -140,7 +140,7 @@
                     <ul id="price-breakdown"></ul>
                 </div>
 
-                <button type="submit" class="submit-btn">Pošalji upit za odabranu procjenu</button>
+                <button type="submit" class="submit-btn" style="background: #1e88e5; color: #fff; border: 2px solid #1e88e5;">Pošalji upit za odabranu procjenu</button>
             </form>
         </div>
     </section>
