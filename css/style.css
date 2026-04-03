@@ -533,6 +533,22 @@ a {
     padding-bottom: 180px;
 }
 
+.calculator-form .submit-btn {
+    background: #1e88e5;
+    color: #fff !important;
+    font-weight: bold;
+    text-transform: none;
+    letter-spacing: 0;
+    border-radius: 5px;
+}
+
+.calculator-form .submit-btn:hover,
+.calculator-form .submit-btn:focus {
+    background: #1e88e5;
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(30, 136, 229, 0.3);
+}
+
 .calculator-block {
     background: #fff;
     border-radius: 10px;
