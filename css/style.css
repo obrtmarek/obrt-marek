@@ -290,6 +290,15 @@ a {
     border-color: #1565c0;
 }
 
+.hero-cta-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+}
+
 /* Services Section */
 .services {
     padding: clamp(50px, 12vw, 80px) clamp(15px, 5vw, 20px);
