@@ -1,0 +1,30 @@
+<div class="carousel">
+    <img src="assets/carousel-images/chemical-cleaning/image1.jpg" class="active" alt="Chemical Cleaning Image 1">
+    <img src="assets/carousel-images/chemical-cleaning/image2.jpg" alt="Chemical Cleaning Image 2">
+    <img src="assets/carousel-images/chemical-cleaning/image3.jpg" alt="Chemical Cleaning Image 3">
+    <div class="carousel-controls">
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+    </div>
+</div>
+<script>
+    let currentIndex = 0;
+    const images = document.querySelectorAll('.carousel img');
+    const totalImages = images.length;
+
+    function showImage(index) {
+        images.forEach((img, i) => {
+            img.classList.toggle('active', i === index);
+        });
+    }
+
+    document.querySelector('.next').addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % totalImages;
+        showImage(currentIndex);
+    });
+
+    document.querySelector('.prev').addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+        showImage(currentIndex);
+    });
+</script>
