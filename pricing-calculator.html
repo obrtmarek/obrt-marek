@@ -37,24 +37,19 @@
                     <h3>Odaberite usluge (moguće više odabira)</h3>
                     <div class="card-grid" id="base-services">
                         <label class="select-card">
-                            <input type="checkbox" name="base-service" value="stanovi" data-label="Čišćenje stanova" data-price="2.2">
+                            <input type="checkbox" name="base-service" value="stanovi" data-label="Čišćenje stanova" data-price="1.6" data-maintenance-levels='[{"label":"Normalna (čista)","multiplier":1.0},{"label":"Prljava","multiplier":1.5},{"label":"Jako prljava","multiplier":2.0},{"label":"Nakon radova","multiplier":3.0}]'>
                             <span class="card-title">Čišćenje stanova</span>
-                            <span class="card-meta">2,20 € / m²</span>
-                        </label>
-                        <label class="select-card">
-                            <input type="checkbox" name="base-service" value="uredi" data-label="Čišćenje ureda" data-price="2.0">
-                            <span class="card-title">Čišćenje ureda</span>
-                            <span class="card-meta">2,00 € / m²</span>
-                        </label>
-                        <label class="select-card">
-                            <input type="checkbox" name="base-service" value="namjestaj" data-label="Dubinsko čišćenje namještaja" data-price="1.6">
-                            <span class="card-title">Dubinsko čišćenje namještaja</span>
                             <span class="card-meta">1,60 € / m²</span>
                         </label>
                         <label class="select-card">
-                            <input type="checkbox" name="base-service" value="zeleno" data-label="Održavanje zelenih površina" data-price="1.8">
+                            <input type="checkbox" name="base-service" value="uredi" data-label="Čišćenje ureda" data-price="0.7">
+                            <span class="card-title">Čišćenje ureda</span>
+                            <span class="card-meta">0,70 € / m²</span>
+                        </label>
+                        <label class="select-card">
+                            <input type="checkbox" name="base-service" value="zeleno" data-label="Održavanje zelenih površina" data-price="0.2" data-maintenance-levels='[{"label":"Normalna (održavana)","multiplier":1.0},{"label":"Zanemarena","multiplier":1.5},{"label":"Jako zanemarena","multiplier":4.0}]'>
                             <span class="card-title">Održavanje zelenih površina</span>
-                            <span class="card-meta">1,80 € / m²</span>
+                            <span class="card-meta">0,20 € / m²</span>
                         </label>
                     </div>
                 </div>
@@ -69,31 +64,28 @@
                     <h3>Dodatne usluge (uz nadoplatu)</h3>
                     <div class="card-grid" id="extra-services">
                         <label class="select-card select-card-small">
-                            <input type="checkbox" name="extra-service" value="prozori" data-label="Čišćenje prozora i staklenih površina" data-price="25">
+                            <input type="checkbox" name="extra-service" value="prozori" data-label="Čišćenje prozora i staklenih površina" data-price="5" data-quantity-label="Broj prozora" data-unit-label="prozora">
                             <span class="card-title">Čišćenje prozora i staklenih površina</span>
-                            <span class="card-meta">+25,00 €</span>
+                            <span class="card-meta">+5,00 € / prozor</span>
                         </label>
                         <label class="select-card select-card-small">
-                            <input type="checkbox" name="extra-service" value="tepisi" data-label="Usisavanje i dubinsko čišćenje tepiha" data-price="35">
+                            <input type="checkbox" name="extra-service" value="tepisi" data-label="Usisavanje i dubinsko čišćenje tepiha" data-price="2" data-quantity-label="Kvadratura tepiha" data-unit-label="m²">
                             <span class="card-title">Usisavanje i dubinsko čišćenje tepiha</span>
-                            <span class="card-meta">+35,00 €</span>
+                            <span class="card-meta">+2,00 € / m²</span>
                         </label>
                         <label class="select-card select-card-small">
-                            <input type="checkbox" name="extra-service" value="dezinfekcija" data-label="Parna dezinfekcija površina" data-price="30">
-                            <span class="card-title">Parna dezinfekcija površina</span>
-                            <span class="card-meta">+30,00 €</span>
+                            <input type="checkbox" name="extra-service" value="kutna-garnitura" data-label="Dubinsko čišćenje kutne garniture" data-price="60" data-quantity-label="Broj kutnih garnitura" data-unit-label="kom">
+                            <span class="card-title">Dubinsko čišćenje kutne garniture</span>
+                            <span class="card-meta">+60,00 € / kom</span>
                         </label>
                         <label class="select-card select-card-small">
-                            <input type="checkbox" name="extra-service" value="otpad" data-label="Pražnjenje koševa i odvoz otpada" data-price="20">
-                            <span class="card-title">Pražnjenje koševa i odvoz otpada</span>
-                            <span class="card-meta">+20,00 €</span>
-                        </label>
-                        <label class="select-card select-card-small">
-                            <input type="checkbox" name="extra-service" value="zivica" data-label="Orezivanje živice i grmlja" data-price="40">
-                            <span class="card-title">Orezivanje živice i grmlja</span>
-                            <span class="card-meta">+40,00 €</span>
+                            <input type="checkbox" name="extra-service" value="stolica" data-label="Dubinsko čišćenje stolice" data-price="4" data-quantity-label="Broj stolica" data-unit-label="kom">
+                            <span class="card-title">Dubinsko čišćenje stolice</span>
+                            <span class="card-meta">+4,00 € / kom</span>
                         </label>
                     </div>
+                    <p class="slider-help">Za odabrane dodatne usluge podesite količinu (npr. broj prozora).</p>
+                    <div id="extra-quantity-list" class="service-kvadratura-list" aria-live="polite"></div>
                 </div>
 
                 <div class="calculator-block">
