@@ -279,13 +279,14 @@ if (pricingForm) {
             const currentValue = extraQuantityMap[extraKey] || 1;
             const quantityLabel = extraInput.dataset.quantityLabel || 'Količina';
             const unitLabel = extraInput.dataset.unitLabel || 'jedinica';
+            const currentPrice = Number(extraInput.dataset.price) * Number(currentValue);
 
             const item = document.createElement('div');
             item.className = 'service-kvadratura-item';
 
             const title = document.createElement('p');
             title.className = 'service-kvadratura-title';
-            title.innerHTML = `${quantityLabel}: <strong><span data-extra-value="${extraKey}">${currentValue}</span> ${unitLabel}</strong>`;
+            title.innerHTML = `${quantityLabel}: <strong><span data-extra-value="${extraKey}">${currentValue}</span> ${unitLabel} - <span data-extra-price-value="${extraKey}">${formatCurrency(currentPrice)}</span> €</strong>`;
 
             const slider = document.createElement('input');
             slider.type = 'range';
@@ -303,6 +304,12 @@ if (pricingForm) {
                 const valueElement = item.querySelector(`[data-extra-value="${extraKey}"]`);
                 if (valueElement) {
                     valueElement.textContent = String(nextValue);
+                }
+
+                const priceElement = item.querySelector(`[data-extra-price-value="${extraKey}"]`);
+                if (priceElement) {
+                    const updatedPrice = Number(extraInput.dataset.price) * Number(nextValue);
+                    priceElement.textContent = formatCurrency(updatedPrice);
                 }
 
                 calculatePrice();
