@@ -18,8 +18,35 @@ if (pricingForm) {
         { value: 'monthly', label: 'Mjesečno', multiplier: 0.8, discountPercent: 20 }
     ];
 
-    const formatCurrency = (value) => value.toFixed(2);
 
+    const calculateServicePrice = (serviceInput, kvadratura) => {
+        const servicePrice = Number(serviceInput.dataset.price);
+        let itemTotal = servicePrice * kvadratura;
+        
+        // Apply maintenance multiplier if applicable
+        const maintenanceLevelsJSON = serviceInput.dataset.maintenanceLevels;
+        if (maintenanceLevelsJSON) {
+            try {
+                const maintenanceLevels = JSON.parse(maintenanceLevelsJSON);
+                const selectedMaintenanceIndex = serviceMaintenanceMap[serviceInput.value];
+                if (selectedMaintenanceIndex !== undefined && maintenanceLevels[selectedMaintenanceIndex]) {
+                    const multiplier = maintenanceLevels[selectedMaintenanceIndex].multiplier;
+                    itemTotal *= multiplier;
+                }
+            } catch (e) {
+                console.error('Failed to parse maintenance levels:', e);
+            }
+        }
+        
+        // Apply frequency discount if applicable
+        const selectedFrequencyValue = serviceFrequencyMap[serviceInput.value] || 'none';
+        const selectedFrequency = frequencyDiscountOptions.find((option) => option.value === selectedFrequencyValue) || frequencyDiscountOptions[0];
+        itemTotal *= selectedFrequency.multiplier;
+        
+        return itemTotal;
+    };
+
+    const formatCurrency = (value) => value.toFixed(2);
     const getWeekendMultiplier = () => {
         const dateValue = document.getElementById('datum-ciscenja').value;
 
@@ -63,17 +90,23 @@ if (pricingForm) {
         });
     };
 
-    const renderServiceKvadraturaSliders = () => {
+    const refreshServicePriceLabels = () => {
         const baseServices = getSelectedCards('base-service');
-        const activeKeys = new Set(baseServices.map((serviceInput) => serviceInput.value));
 
-        Object.keys(serviceKvadraturaMap).forEach((serviceKey) => {
-            if (!activeKeys.has(serviceKey)) {
-                delete serviceKvadraturaMap[serviceKey];
-                delete serviceMaintenanceMap[serviceKey];
-                delete serviceFrequencyMap[serviceKey];
+        baseServices.forEach((serviceInput) => {
+            const serviceKey = serviceInput.value;
+            const serviceKvadratura = Number(serviceKvadraturaMap[serviceKey] || 60);
+            const priceElement = serviceKvadraturaList.querySelector(`[data-price-value="${serviceKey}"]`);
+
+            if (priceElement) {
+                const updatedPrice = calculateServicePrice(serviceInput, serviceKvadratura);
+                priceElement.textContent = formatCurrency(updatedPrice);
             }
         });
+    };
+
+    const renderServiceKvadraturaSliders = () => {
+        const baseServices = getSelectedCards('base-service');
 
         ensureServiceKvadraturaState(baseServices);
         serviceKvadraturaList.innerHTML = '';
@@ -95,7 +128,8 @@ if (pricingForm) {
 
             const title = document.createElement('p');
             title.className = 'service-kvadratura-title';
-            title.innerHTML = `${serviceInput.dataset.label}: <strong><span data-kv-value="${serviceKey}">${currentValue}</span> m²</strong>`;
+            const servicePrice = calculateServicePrice(serviceInput, currentValue);
+            title.innerHTML = `${serviceInput.dataset.label}: <strong><span data-kv-value="${serviceKey}">${currentValue}</span> m² - <span data-price-value="${serviceKey}">${formatCurrency(servicePrice)}</span> €</strong>`;
 
             const slider = document.createElement('input');
             slider.type = 'range';
@@ -113,6 +147,12 @@ if (pricingForm) {
                 const valueElement = item.querySelector(`[data-kv-value="${serviceKey}"]`);
                 if (valueElement) {
                     valueElement.textContent = String(nextValue);
+                }
+
+                const priceElement = item.querySelector(`[data-price-value="${serviceKey}"]`);
+                if (priceElement) {
+                    const updatedPrice = calculateServicePrice(serviceInput, nextValue);
+                    priceElement.textContent = formatCurrency(updatedPrice);
                 }
 
                 calculatePrice();
@@ -142,14 +182,17 @@ if (pricingForm) {
                         const option = document.createElement('option');
                         option.value = index;
                         option.textContent = `${level.label} (x${level.multiplier.toFixed(2)})`;
-                        if (index === 0) {
-                            option.selected = true; // Set first option as default
-                        }
+
+                        const savedMaintenanceIndex = serviceMaintenanceMap[serviceKey];
+                        const effectiveIndex = typeof savedMaintenanceIndex === 'number' ? savedMaintenanceIndex : 0;
+                        option.selected = index === effectiveIndex;
+
                         maintenanceSelect.appendChild(option);
                     });
 
-                    // Initialize with first option selected
-                    serviceMaintenanceMap[serviceKey] = 0;
+                    if (typeof serviceMaintenanceMap[serviceKey] !== 'number') {
+                        serviceMaintenanceMap[serviceKey] = 0;
+                    }
                     
                     maintenanceSelect.addEventListener('change', calculatePrice);
                     
@@ -194,6 +237,8 @@ if (pricingForm) {
 
             serviceKvadraturaList.appendChild(item);
         });
+
+        refreshServicePriceLabels();
     };
 
     const ensureExtraQuantityState = (extraServices) => {
@@ -324,7 +369,7 @@ if (pricingForm) {
         });
 
         const subtotal = baseTotal + extrasTotal;
-        const total = subtotal * weekendMultiplier * timeMultiplier;
+        const total = subtotal * weekendMultiplier;
 
         totalPriceElement.textContent = formatCurrency(total);
         breakdownElement.innerHTML = '';
@@ -346,12 +391,6 @@ if (pricingForm) {
             const weekendItem = document.createElement('li');
             weekendItem.textContent = 'Vikend termin: +20%';
             breakdownElement.appendChild(weekendItem);
-        }
-
-        if (timeMultiplier > 1) {
-            const timeItem = document.createElement('li');
-            timeItem.textContent = 'Rani/kasni termin: +15%';
-            breakdownElement.appendChild(timeItem);
         }
     };
 
@@ -387,12 +426,14 @@ if (pricingForm) {
             } else {
                 serviceMaintenanceMap[serviceKey] = Number(selectedIndex);
             }
+            refreshServicePriceLabels();
             calculatePrice();
         }
 
         if (event.target.classList.contains('frequency-discount-select')) {
             const serviceKey = event.target.dataset.serviceKey;
             serviceFrequencyMap[serviceKey] = event.target.value || 'none';
+            refreshServicePriceLabels();
             calculatePrice();
         }
     });
@@ -502,13 +543,60 @@ if (pricingForm) {
 
         calculatePrice();
         prepareFormForSubmission();
+
+        pricingForm.querySelectorAll('input[name="base-service"], input[name="extra-service"]').forEach((inputElement) => {
+            inputElement.disabled = true;
+        });
         
         // Add a Message field with the full quote summary
-        const messageContent = document.getElementById('price-breakdown').innerText || '';
+        const baseServices = getSelectedCards('base-service');
+        const extraServices = getSelectedCards('extra-service');
+        
+        let messageParts = ['--- SAŽETAK UPITA ---\n'];
+        
+        if (baseServices.length > 0) {
+            messageParts.push('\nGLAVNE USLUGE:');
+            baseServices.forEach((service) => {
+                const kvadratura = serviceKvadraturaMap[service.value];
+                const serviceTotal = calculateServicePrice(service, kvadratura);
+                messageParts.push(`  • ${service.dataset.label}: ${kvadratura} m² — ${formatCurrency(serviceTotal)} €`);
+            });
+        }
+        
+        if (extraServices.length > 0) {
+            messageParts.push('\nDODATNE USLUGE:');
+            extraServices.forEach((service) => {
+                const quantity = extraQuantityMap[service.value];
+                const unitLabel = service.dataset.unitLabel || 'kom';
+                const extraTotal = Number(service.dataset.price) * Number(quantity);
+                messageParts.push(`  • ${service.dataset.label}: ${quantity} ${unitLabel} — ${formatCurrency(extraTotal)} €`);
+            });
+        }
+        
+        const dateField = document.getElementById('datum-ciscenja').value;
+        const timeField = document.getElementById('vrijeme-ciscenja').value;
+        if (dateField && timeField) {
+            messageParts.push(`\nTERMIN: ${dateField} u ${timeField}`);
+        }
+
+        const weekendMultiplier = getWeekendMultiplier();
+        if (weekendMultiplier > 1) {
+            messageParts.push('\nNAPOMENA: Vikend termin +20%');
+        }
+        
+        messageParts.push(`\nUKUPNA CIJENA: ${totalPriceElement.textContent} €`);
+        messageParts.push('\n\n--- PODACI ZA KONTAKT ---');
+        messageParts.push(`Ime: ${document.getElementById('ime').value}`);
+        messageParts.push(`Adresa: ${document.getElementById('adresa').value}`);
+        const email = document.getElementById('email').value;
+        const telefon = document.getElementById('telefon').value;
+        if (email) messageParts.push(`Email: ${email}`);
+        if (telefon) messageParts.push(`Telefon: ${telefon}`);
+        
         const messageField = document.createElement('input');
         messageField.type = 'hidden';
         messageField.name = 'Message';
-        messageField.value = `Sažetak upta:\n\n${messageContent}\n\nUkupna cijena: ${totalPriceElement.textContent} €`;
+        messageField.value = messageParts.join('\n');
         pricingForm.appendChild(messageField);
         
         console.log('Submitting form to Formspree...');
