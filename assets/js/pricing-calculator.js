@@ -559,40 +559,66 @@ if (pricingForm) {
         const baseServices = getSelectedCards('base-service');
         const extraServices = getSelectedCards('extra-service');
         
-        let messageParts = ['--- SAŽETAK UPITA ---\n'];
+        const messageParts = [
+            'SAŽETAK UPITA',
+            '========================'
+        ];
         
         if (baseServices.length > 0) {
-            messageParts.push('\nGLAVNE USLUGE:');
+            messageParts.push('', 'GLAVNE USLUGE:');
             baseServices.forEach((service) => {
                 const kvadratura = serviceKvadraturaMap[service.value];
                 const serviceTotal = calculateServicePrice(service, kvadratura);
-                messageParts.push(`  • ${service.dataset.label}: ${kvadratura} m² — ${formatCurrency(serviceTotal)} €`);
+
+                let stanjeLabel = 'Nije primjenjivo';
+                if (service.dataset.maintenanceLevels) {
+                    try {
+                        const maintenanceLevels = JSON.parse(service.dataset.maintenanceLevels);
+                        const selectedMaintenanceIndex = serviceMaintenanceMap[service.value];
+                        if (selectedMaintenanceIndex !== undefined && maintenanceLevels[selectedMaintenanceIndex]) {
+                            stanjeLabel = maintenanceLevels[selectedMaintenanceIndex].label;
+                        }
+                    } catch (e) {
+                        stanjeLabel = 'N/A';
+                    }
+                }
+
+                const selectedFrequencyValue = serviceFrequencyMap[service.value] || 'none';
+                const selectedFrequency = frequencyDiscountOptions.find((option) => option.value === selectedFrequencyValue) || frequencyDiscountOptions[0];
+
+                messageParts.push(`• ${service.dataset.label}`);
+                messageParts.push(`  - Kvadratura: ${kvadratura} m²`);
+                messageParts.push(`  - Stanje prostora: ${stanjeLabel}`);
+                messageParts.push(`  - Učestalost čišćenja: ${selectedFrequency.label}`);
+                messageParts.push(`  - Cijena: ${formatCurrency(serviceTotal)} €`);
             });
         }
         
         if (extraServices.length > 0) {
-            messageParts.push('\nDODATNE USLUGE:');
+            messageParts.push('', 'DODATNE USLUGE:');
             extraServices.forEach((service) => {
                 const quantity = extraQuantityMap[service.value];
                 const unitLabel = service.dataset.unitLabel || 'kom';
                 const extraTotal = Number(service.dataset.price) * Number(quantity);
-                messageParts.push(`  • ${service.dataset.label}: ${quantity} ${unitLabel} — ${formatCurrency(extraTotal)} €`);
+                messageParts.push(`• ${service.dataset.label}`);
+                messageParts.push(`  - Količina: ${quantity} ${unitLabel}`);
+                messageParts.push(`  - Cijena: ${formatCurrency(extraTotal)} €`);
             });
         }
         
         const dateField = document.getElementById('datum-ciscenja').value;
         const timeField = document.getElementById('vrijeme-ciscenja').value;
         if (dateField && timeField) {
-            messageParts.push(`\nTERMIN: ${dateField} u ${timeField}`);
+            messageParts.push('', `TERMIN: ${dateField} u ${timeField}`);
         }
 
         const weekendMultiplier = getWeekendMultiplier();
         if (weekendMultiplier > 1) {
-            messageParts.push('\nNAPOMENA: Vikend termin +20%');
+            messageParts.push('NAPOMENA: Vikend termin +20%');
         }
         
-        messageParts.push(`\nUKUPNA CIJENA: ${totalPriceElement.textContent} €`);
-        messageParts.push('\n\n--- PODACI ZA KONTAKT ---');
+        messageParts.push('', `UKUPNA CIJENA: ${totalPriceElement.textContent} €`);
+        messageParts.push('', 'PODACI ZA KONTAKT', '========================');
         messageParts.push(`Ime: ${document.getElementById('ime').value}`);
         messageParts.push(`Adresa: ${document.getElementById('adresa').value}`);
         const email = document.getElementById('email').value;
