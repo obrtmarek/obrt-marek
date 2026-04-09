@@ -402,6 +402,89 @@ if (pricingForm) {
         field.addEventListener('input', validateContactOptions);
     });
 
+    const prepareFormForSubmission = () => {
+        // Remove existing hidden fields
+        pricingForm.querySelectorAll('input[type="hidden"]').forEach((field) => {
+            field.remove();
+        });
+
+        // Add hidden field for selected services
+        const baseServices = getSelectedCards('base-service');
+        const extraServices = getSelectedCards('extra-service');
+
+        if (baseServices.length > 0) {
+            const baseServicesData = baseServices.map((service) => {
+                const kvadratura = serviceKvadraturaMap[service.value];
+                const maintenance = serviceMaintenanceMap[service.value];
+                const frequency = serviceFrequencyMap[service.value];
+                let details = `${service.dataset.label} (${kvadratura} m²)`;
+                
+                // Add maintenance level if applicable
+                if (maintenance !== undefined && service.dataset.maintenanceLevels) {
+                    try {
+                        const maintenanceLevels = JSON.parse(service.dataset.maintenanceLevels);
+                        if (maintenanceLevels[maintenance]) {
+                            details += ` - Stanje: ${maintenanceLevels[maintenance].label}`;
+                        }
+                    } catch (e) {
+                        console.error('Failed to parse maintenance levels:', e);
+                    }
+                }
+                
+                // Add frequency if not default
+                if (frequency && frequency !== 'none') {
+                    const freq = frequencyDiscountOptions.find(f => f.value === frequency);
+                    if (freq) details += ` - ${freq.label}`;
+                }
+                
+                return details;
+            }).join('; ');
+            const hiddenField = document.createElement('input');
+            hiddenField.type = 'hidden';
+            hiddenField.name = 'Glavne usluge';
+            hiddenField.value = baseServicesData;
+            pricingForm.appendChild(hiddenField);
+        }
+
+        if (extraServices.length > 0) {
+            const extraServicesData = extraServices.map((service) => {
+                const quantity = extraQuantityMap[service.value];
+                const unitLabel = service.dataset.unitLabel || 'kom';
+                return `${service.dataset.label} (${quantity} ${unitLabel})`;
+            }).join('; ');
+            const hiddenField = document.createElement('input');
+            hiddenField.type = 'hidden';
+            hiddenField.name = 'Dodatne usluge';
+            hiddenField.value = extraServicesData;
+            pricingForm.appendChild(hiddenField);
+        }
+
+        // Add hidden field for total price
+        const totalPriceField = document.createElement('input');
+        totalPriceField.type = 'hidden';
+        totalPriceField.name = 'Ukupna cijena';
+        totalPriceField.value = totalPriceElement.textContent + ' €';
+        pricingForm.appendChild(totalPriceField);
+
+        // Add hidden field for date and time
+        const dateField = document.getElementById('datum-ciscenja').value;
+        const timeField = document.getElementById('vrijeme-ciscenja').value;
+        if (dateField && timeField) {
+            const hiddenDateTimeField = document.createElement('input');
+            hiddenDateTimeField.type = 'hidden';
+            hiddenDateTimeField.name = 'Termin čišćenja';
+            hiddenDateTimeField.value = `${dateField} u ${timeField}`;
+            pricingForm.appendChild(hiddenDateTimeField);
+        }
+        
+        console.log('Form prepared with hidden fields:', {
+            baseServices: baseServices.length,
+            extraServices: extraServices.length,
+            totalPrice: totalPriceElement.textContent,
+            hiddenFieldsCount: pricingForm.querySelectorAll('input[type="hidden"]').length
+        });
+    };
+
     pricingForm.addEventListener('submit', (event) => {
         event.preventDefault();
 
@@ -418,7 +501,19 @@ if (pricingForm) {
         }
 
         calculatePrice();
-        alert('Upit je pripremljen. Kontaktirat ćemo vas uskoro.');
+        prepareFormForSubmission();
+        
+        // Add a Message field with the full quote summary
+        const messageContent = document.getElementById('price-breakdown').innerText || '';
+        const messageField = document.createElement('input');
+        messageField.type = 'hidden';
+        messageField.name = 'Message';
+        messageField.value = `Sažetak upta:\n\n${messageContent}\n\nUkupna cijena: ${totalPriceElement.textContent} €`;
+        pricingForm.appendChild(messageField);
+        
+        console.log('Submitting form to Formspree...');
+        // Submit the form to Formspree
+        pricingForm.submit();
     });
 
     updateSelectedCardStyle();
