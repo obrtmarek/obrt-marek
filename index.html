@@ -1,115 +1,50 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="hr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Obrt Marek - Usluge čišćenja i održavanja zelenih površina</title>
+    <meta name="description" content="Obrt Marek – čišćenje stanova i ureda, dubinsko čišćenje namještaja te održavanje zelenih površina.">
+    <title>Obrt Marek | Čišćenje i održavanje</title>
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="stylesheet" href="css/style.css">
-    <style>
-        #contact .contact-form input::placeholder,
-        #contact .contact-form textarea::placeholder {
-            color: #1e88e5;
-            opacity: 0.7;
-        }
-    </style>
 </head>
 <body>
-    <!-- Header -->
+    <div class="topbar"><div class="container"><a href="tel:+385953454523">Nazovite: 095 345 4523</a></div></div>
     <header class="header">
         <div class="container">
-            <div class="logo-section">
-                <h1 class="business-name"><a href="index.html" style="color: inherit; text-decoration: none; cursor: pointer;">OBRT MAREK</a></h1>
-                <p class="tagline"></p>
-            </div>
-            <nav class="nav">
-                <ul>
-                    <li><a href="#cleaning">Usluge</a></li>
-                    <li><a href="#contact">Kontakt</a></li>
-                </ul>
-            </nav>
+            <a class="brand" href="index.html" aria-label="Obrt Marek – početna">OBRT MAREK</a>
+            <nav class="nav" aria-label="Glavna navigacija"><ul><li><a href="#usluge">Usluge</a></li><li><a href="#kontakt">Kontakt</a></li></ul></nav>
         </div>
     </header>
-
-    <!-- Hero Section -->
-    <section class="hero" id="home" style="background: linear-gradient(135deg, #1e88e5 0%, #1565c0 100%); color: #fff;">
-        <div class="container">
-            <h2>Profesionalne Usluge Čišćenja</h2>
-            <p>Pouzdane usluge čišćenja u vašoj blizini s kvalitetnom službom i detaljnom brigom</p>
-            <div class="hero-cta-row">
-                <a href="#contact" class="cta-button">Kontaktirajte nas</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Cleaning Services Section -->
-    <section class="services cleaning-section" id="cleaning">
-        <div class="container">
-            <div class="service-grid">
-                <div class="service-card">
-                    <a href="cleaning-apartments.html"> <!-- Link to the cleaning apartments page -->
-                        <div class="service-icon">🏠</div>
-                        <h3>Čišćenje Stanova</h3>
-                        <p>Profesionalno čišćenje apartmana i kuća. Detaljno čišćenje svih prostorija sa kvalitetnim materijalima.</p>
-                    </a>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-copy">
+                    <p class="eyebrow">Čišćenje i održavanje</p>
+                    <h1>Vaš prostor.<br><em>Naša briga.</em></h1>
+                    <p>Čišćenje doma i poslovnih prostora, dubinsko čišćenje namještaja i održavanje okućnice – prema dogovoru.</p>
+                    <div class="hero-actions"><a class="button button-primary" href="tel:+385953454523">Nazovite nas</a><a class="button button-secondary" href="#usluge">Pogledajte usluge</a></div>
                 </div>
-                <div class="service-card">
-                    <a href="cleaning-offices.html"> <!-- Link to the cleaning offices page -->
-                        <div class="service-icon">🏢</div>
-                        <h3>Čišćenje Ureda</h3>
-                        <p>Održavanje uredskih prostora. Čist i uredan ured je produktivniji ured.</p>
-                    </a>
-                </div>
-                <div class="service-card">
-                        <a href="deep-cleaning-furniture.html"> <!-- Link to the deep cleaning furniture page -->
-                            <div class="service-icon">🛋️</div>
-                        <h3>Dubinsko Čišćenje Namještaja</h3>
-                        <p>Profesionalno čišćenje namještaja i tekstila. Uklanjamo mrlje, prašinu i neprilike sa vašeg dragocjenog namještaja.</p>
-                    </a>
-                </div>
-                <div class="service-card">
-                    <a href="landscaping.html"> <!-- Link to the landscaping services page -->
-                        <div class="service-icon">🌿</div>
-                        <h3>Održavanje Zelenih Površina</h3>
-                        <p>Strokovito održavanje vrtova, travnjaka i zelenih površina. Redovna briga za biljke i uređenje okoline.</p>
-                    </a>
+                <div class="hero-photo">
+                    <img src="assets/carousel-images/deep-cleaning/deep-1.jpeg" alt="Dubinsko čišćenje tapeciranog namještaja">
+                    <span class="hero-badge">Jedan kontakt za dom, ured i okućnicu.</span>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact-section" id="contact" style="background: linear-gradient(135deg, #222 0%, #333 100%); color: #fff;">
-        <div class="container">
-            <h2 style="color: #fff;">Kontaktirajte Nas</h2>
-            <div class="contact-content">
-                <div class="contact-info" style="background: rgba(30, 136, 229, 0.08); border-left: 5px solid #1e88e5; color: #fff;">
-                    <h3 style="color: #fff;">Obrt Marek</h3>
-                    <p class="contact-label" style="color: #1e88e5;">Pozovite nas za usluge čišćenja:</p>
-                    <p class="phone-number" style="background: #1e88e5; color: #fff !important; font-weight: bold; padding: 10px;">📞 095 345 4523</p>
-                    <p class="contact-label" style="color: #1e88e5;">Email:</p>
-                    <p><a href="mailto:obrtmarek@gmail.com" style="color: #1e88e5;">obrtmarek@gmail.com</a></p>
-                    <p class="contact-label" style="color: #1e88e5;">Dostupni smo:</p>
-                    <p style="color: #fff;">Ponedjeljak - Petak: 07:00 - 17:00</p>
-                    <p style="color: #fff;">Subota i Nedjelja: po dogovoru</p>
-                </div>
-                <div class="contact-form">
-                    <form action="https://formspree.io/f/xgopdwyn" method="post">
-                        <input type="text" name="Name" placeholder="Vaše ime" required style="border: 2px solid #1e88e5; color: #1e88e5; background: #182848;">
-                        <input type="email" name="Email" placeholder="Vaš email" required style="border: 2px solid #1e88e5; color: #1e88e5; background: #182848;">
-                        <textarea name="Message" placeholder="Vaša poruka" rows="5" required style="border: 2px solid #1e88e5; color: #1e88e5; background: #182848;"></textarea>
-                        <button type="submit" class="submit-btn" style="background: #1e88e5; color: #fff; border: 2px solid #1e88e5;">Pošalji Poruku</button>
-                    </form>
+        </section>
+        <section class="services" id="usluge">
+            <div class="container">
+                <div class="section-heading"><p class="eyebrow">Usluge</p><h2>Odaberite što treba srediti.</h2><p>Jasno, pouzdano i bez nepotrebnih paketa.</p></div>
+                <div class="service-grid">
+                    <article class="service-card"><img src="assets/carousel-images/cleaning-apartments/cleaning-1.jpg" alt="Čišćenje stana"><div class="service-card-content"><h3>Čišćenje stanova</h3><p>Stanovi, apartmani i kuće.</p><a class="card-link" href="cleaning-apartments.html">Saznajte više →</a></div></article>
+                    <article class="service-card"><img src="assets/carousel-images/cleaning-offices/offices-1.jpg" alt="Čišćenje uredskog prostora"><div class="service-card-content"><h3>Čišćenje ureda</h3><p>Uredski i poslovni prostori.</p><a class="card-link" href="cleaning-offices.html">Saznajte više →</a></div></article>
+                    <article class="service-card"><img src="assets/carousel-images/deep-cleaning/deep-3.jpg" alt="Dubinsko čišćenje namještaja"><div class="service-card-content"><h3>Dubinsko čišćenje</h3><p>Namještaj, madraci i tepisi.</p><a class="card-link" href="deep-cleaning-furniture.html">Saznajte više →</a></div></article>
+                    <article class="service-card"><img src="assets/carousel-images/landscaping/landscaping-1.jpeg" alt="Održavanje zelenih površina"><div class="service-card-content"><h3>Zelene površine</h3><p>Vrtovi, travnjaci i okućnice.</p><a class="card-link" href="landscaping.html">Saznajte više →</a></div></article>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2026 Obrt Marek. Sva prava zadržana.</p>
-        </div>
-    </footer>
+        </section>
+        <section class="process"><div class="container"><div class="section-heading"><p class="eyebrow">Kako radimo</p><h2>Dogovor je jednostavan.</h2></div><div class="process-grid"><article class="process-card"><span class="process-number">01</span><h3>Javite se</h3><p>Recite nam o kojem se prostoru i usluzi radi.</p></article><article class="process-card"><span class="process-number">02</span><h3>Dogovorimo detalje</h3><p>Usklađujemo opseg posla i termin koji vam odgovara.</p></article><article class="process-card"><span class="process-number">03</span><h3>Dolazimo</h3><p>U dogovoreno vrijeme obavljamo posao temeljito i uredno.</p></article></div></div></section>
+        <section class="contact" id="kontakt"><div class="container contact-grid"><div class="contact-copy"><p class="eyebrow">Kontakt</p><h2>Recite što treba napraviti.</h2><p>Za brzi dogovor nazovite ili pošaljite upit.</p><div class="contact-options"><a class="contact-option" href="tel:+385953454523"><span>Telefon</span><strong>095 345 4523</strong></a><a class="contact-option" href="mailto:obrtmarek@gmail.com"><span>Email</span><strong>obrtmarek@gmail.com</strong></a><div class="contact-option"><span>Dostupnost</span><strong>Pon–Pet 07:00–17:00 · vikend po dogovoru</strong></div></div></div><div class="contact-form"><h3>Pošaljite upit</h3><form action="https://formspree.io/f/xgopdwyn" method="post"><div class="form-row"><div class="field"><label for="name">Ime</label><input id="name" name="Name" autocomplete="name" required></div><div class="field"><label for="email">Email</label><input id="email" type="email" name="Email" autocomplete="email" required></div></div><div class="field"><label for="service">Usluga</label><select id="service" name="Service"><option>Čišćenje stanova</option><option>Čišćenje ureda</option><option>Dubinsko čišćenje namještaja</option><option>Održavanje zelenih površina</option></select></div><div class="field"><label for="message">Poruka</label><textarea id="message" name="Message" required></textarea></div><button class="button button-primary submit-button" type="submit">Pošalji upit</button></form></div></div></section>
+    </main>
+    <footer class="footer"><div class="container"><span>© 2026 Obrt Marek</span><span>Čišćenje i održavanje po dogovoru</span></div></footer>
 </body>
 </html>
