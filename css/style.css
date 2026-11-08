@@ -106,6 +106,7 @@ button, input, textarea, select { font: inherit; }
 .carousel { position: relative; overflow: hidden; border-radius: 14px; background: #151922; box-shadow: var(--shadow); }
 .carousel img { display: none; width: 100%; height: clamp(280px, 42vw, 460px); object-fit: cover; }
 .carousel img.active { display: block; }
+.carousel-full img { height: auto; }
 .carousel-btn { position: absolute; top: 50%; z-index: 1; width: 42px; height: 42px; border: 0; border-radius: 50%; background: rgba(255,255,255,.9); color: var(--ink); cursor: pointer; transform: translateY(-50%); }
 .carousel-btn.left { left: 12px; }
 .carousel-btn.right { right: 12px; }
